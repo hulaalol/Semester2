@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class GameGrid {
 	
-	private String[] cardValues = {"Affe","Elefant","Tiger","LÃ¶we","Schwein","Papagei","Pferd","Kuh"};
+	private String[] cardValues = {"Affe","Hund","Tiger","Löwe","Yak","Dachs","Pferd","Kuh"};
 	private MemoryCard[][]cards = new MemoryCard[4][4];
 	
 	
