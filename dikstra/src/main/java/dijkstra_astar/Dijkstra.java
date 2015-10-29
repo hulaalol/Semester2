@@ -50,8 +50,8 @@ public class Dijkstra {
 		// Hausaufgabe: Dijkstra zum Laufen bringen
 		// Klasse BinaryHeap, wenn man besseren d-Wert findet steigt der Knoten auf im Heap! nicht implementiert in BinaryHeap
 		// rise Funktion nicht implementiert
-		// 1. neuer d-Wert wird gesetzt
-		// 2. methode Build-Heap baut kompletten Heap auf
+		// 1. neuer besserer d-Wert wird gesetzt -->
+		// 2. methode Build-Heap baut kompletten Heap neu auf und neuer d-Wert ist an der richtigen Stelle
 		
 		
 	}

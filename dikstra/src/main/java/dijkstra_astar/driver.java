@@ -7,10 +7,10 @@ public class driver {
 	
 	public static void main(String[] args) {
 		
-		DNode test1 = new DNode();
+		DNode test1 = new DNode("test1");
 		test1.distance=1532;
 		
-		DNode test2 = new DNode();
+		DNode test2 = new DNode("test2");
 		test2.distance=891;
 		
 		
