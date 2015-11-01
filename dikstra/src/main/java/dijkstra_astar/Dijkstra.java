@@ -5,6 +5,10 @@ public class Dijkstra {
 	
 	public static void main(String[] args) {
 		
+		//if b is marked as completed the shortest way was found
+		boolean foundWay = false;
+
+		//build graph
 		DNode a = new DNode("a");
 		DNode x2= new DNode("x2");
 		DNode x3 = new DNode("x3");
@@ -47,13 +51,93 @@ public class Dijkstra {
 		
 		x11.addEdge(b, 111);
 		
-		// Hausaufgabe: Dijkstra zum Laufen bringen
-		// Klasse BinaryHeap, wenn man besseren d-Wert findet steigt der Knoten auf im Heap! nicht implementiert in BinaryHeap
-		// rise Funktion nicht implementiert
-		// 1. neuer besserer d-Wert wird gesetzt -->
-		// 2. methode Build-Heap baut kompletten Heap neu auf und neuer d-Wert ist an der richtigen Stelle
+		DNode[] graph = {a,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,b};
+		
+		BinaryHeap heap = new BinaryHeap();
+		
+		//insert all nodes into binaryHeap
+		for(DNode node : graph){
+			
+			try {
+				heap.insert(node);	
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		//set startpoint - distance 0
+		a.distance=0;
+		heap.buildHeap();
 		
 		
+		//expand smallest node in binary heap
+		while(foundWay==false){
+
+				DNode smallest = (DNode) heap.findMin();
+				
+				//iterate over all edges to nodes that are not completed
+				for(int i=0; i<smallest.edges.size(); i++){
+					
+					if(smallest.edges.get(i).complete==false){
+					int prädistanz = smallest.distance + smallest.weights.get(i);
+					//predistance + weight
+
+					if (prädistanz < smallest.edges.get(i).distance){
+						//expanding
+						smallest.edges.get(i).distance = prädistanz;
+						smallest.edges.get(i).origin = smallest;
+					}
+					}
+
+				}
+				
+				//set status of node to completed and delete it from heap
+				smallest.complete = true;
+				heap.deleteMin();
+				//rearrange Heap in right order
+				heap.buildHeap();
+				
+
+				//check if b is completed
+				if(b.complete){
+					foundWay = true;
+				}
+
+		}
+
+		
+		//when finished print out the shortest way
+		String[] way = new String[graph.length];
+		
+		//set b as target at the last index of way array
+		DNode lastNode = b;
+		way[graph.length-1]=b.name;
+		
+		for(int i=2; i<graph.length-1; i++){
+			
+			if(lastNode.origin!=null){ 						//check if node has an origin
+				way[graph.length-i]=lastNode.origin.name;	//if origin exists, put its name in front of the prior lastNode
+				lastNode = lastNode.origin;					//set the origin to the lastNode
+				
+			}else{ 											//node a --> origin=null (way finished)
+				break;
+			}
+
+		}
+		
+		System.out.println("Kürzester Weg - "+b.distance+" Längeneinheiten über:");
+		
+		for(String s : way){
+			
+			if(s!=null && (!(s.equalsIgnoreCase("b")))){
+				System.out.print(s+" --> ");
+			}else if(s!=null){
+				System.out.print("b");
+			}
+
+		}
+
 	}
 	
 	

@@ -23,6 +23,7 @@ public class DNode implements Comparable {
 	public DNode(String name){
 		this.name = name;
 		this.distance = Integer.MAX_VALUE;
+		this.weight2Origin = Integer.MAX_VALUE;
 	}
 	
 	

@@ -1,6 +1,6 @@
 package dijkstra_astar;
 
-public class driver {
+public class TestCompareTo {
 
 	
 	

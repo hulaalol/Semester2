@@ -90,7 +90,7 @@ public class BinaryHeap {
 	 * Establish heap order property from an arbitrary arrangement of items.
 	 * Runs in linear time.
 	 */
-	private void buildHeap() {
+	public void buildHeap() {
 		for (int i = currentSize / 2; i > 0; i--)
 			percolateDown(i);
 	}
