@@ -74,7 +74,7 @@ public class Dijkstra {
 		//expand smallest node in binary heap
 		while(foundWay==false){
 
-				DNode smallestNode = (DNode) heap.findMin();
+				DNode smallestNode = (DNode) heap.deleteMin();
 				
 				//iterate over all edges to nodes that are not completed
 				for(int i=0; i<smallestNode.edges.size(); i++){
@@ -87,22 +87,18 @@ public class Dijkstra {
 						//expanding
 						smallestNode.edges.get(i).distance = predistance;
 						smallestNode.edges.get(i).origin = smallestNode;
+						
+						
+						heap.rise(smallestNode.edges.get(i).heapIndex);
+						
 					}
 					}
 
 				}
 				
-				//set status of node to completed and delete it from heap
+				//set status of node to completed
 				smallestNode.complete = true;
-				heap.deleteMin();
-				//rearrange Heap in right order
-				heap.buildHeap();
-				
 
-				//check if b is completed
-				
-				
-					
 					
 				int counter = 0;
 				for(DNode node : graph){
@@ -116,12 +112,6 @@ public class Dijkstra {
 				if(counter==graph.length){
 					foundWay=true;
 				}
-					
-				
-//				
-//				if(b.complete){
-//					foundWay = true;
-//				}
 
 		}
 

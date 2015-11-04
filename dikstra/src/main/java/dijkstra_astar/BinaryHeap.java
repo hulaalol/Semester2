@@ -1,5 +1,7 @@
 package dijkstra_astar;
 
+import dijkstra_astar.DNode;
+
 //BinaryHeap class
 //
 // CONSTRUCTION: with optional capacity (that defaults to 100)
@@ -48,6 +50,7 @@ public class BinaryHeap {
 	 * @exception Overflow
 	 *                if container is full.
 	 */
+	@SuppressWarnings("unchecked")
 	public void insert(Comparable x) throws Exception {
 		if (isFull())
 			throw new Exception("Overflow error");
@@ -56,19 +59,21 @@ public class BinaryHeap {
 		int hole = ++currentSize;
 		for (; hole > 1 && x.compareTo(array[hole / 2]) < 0; hole /= 2){
 			
-			
 			array[hole] = array[hole / 2];
-			((DNode) array[hole]).heapIndex=hole;
-			
-			
-			
-			
 		}
 			
 		
 		array[hole] = x;
 		
 		//hier heap Index zuweisen
+		
+		 
+		Comparable whattheheck = array[hole];
+		
+		DNode node = (DNode)x;
+		
+		node.heapIndex = hole;
+		
 		
 	}
 
@@ -149,53 +154,47 @@ public class BinaryHeap {
 		Comparable tmp = array[hole];
 
 		for (; hole * 2 <= currentSize; hole = child) {
+			
 			child = hole * 2;
-			if (child != currentSize
-					&& array[child + 1].compareTo(array[child]) < 0)
+			if (child != currentSize && array[child + 1].compareTo(array[child]) < 0){
 				child++;
-			if (array[child].compareTo(tmp) < 0)
+			}
+			if (array[child].compareTo(tmp) < 0){
 				array[hole] = array[child];
-			else
+			}else{
 				break;
+			}
+				
 		}
+		
+		
 		array[hole] = tmp;
+		((DNode) array[hole]).heapIndex=hole;
 	}
 	
 	
+	
+	/**
+	 * Internal method to rise elements up in the heap.
+	 * 
+	 * @param hole
+	 *            the index of the element being checked if its rising
+	 *            runs in linear time
+	 */
+	
+	@SuppressWarnings("unchecked")
 	public void rise(int hole){
 		
-		
-		
-		
-		
-		
-		int parent = hole/2;
-		
-		
-		
-		
-		
-		for(int temp = parent; array[temp].compareTo(array[hole])==(-1); temp++){
+		if(hole>=2){
 			
-		}
-		
-		
-		
-		
-		
-		Comparable tmp = array[hole];
-		
-		if(array[parent].compareTo(tmp)==(-1)){
-			
-			percolateDown(parent);
-		}
-		
-		
+			for(int parent=(hole/2);parent>0 && array[parent].compareTo(array[hole])==(1); parent/=2){
+				percolateDown(parent);
+				hole/=2;
+			}	
 
+		}
+		
 	}
-	
-	
-	
 
 	// Test program
 	public static void main(String[] args) {
