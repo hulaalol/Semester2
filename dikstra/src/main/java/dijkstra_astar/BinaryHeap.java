@@ -54,9 +54,22 @@ public class BinaryHeap {
 
 		// Percolate up
 		int hole = ++currentSize;
-		for (; hole > 1 && x.compareTo(array[hole / 2]) < 0; hole /= 2)
+		for (; hole > 1 && x.compareTo(array[hole / 2]) < 0; hole /= 2){
+			
+			
 			array[hole] = array[hole / 2];
+			((DNode) array[hole]).heapIndex=hole;
+			
+			
+			
+			
+		}
+			
+		
 		array[hole] = x;
+		
+		//hier heap Index zuweisen
+		
 	}
 
 	/**
@@ -147,6 +160,42 @@ public class BinaryHeap {
 		}
 		array[hole] = tmp;
 	}
+	
+	
+	public void rise(int hole){
+		
+		
+		
+		
+		
+		
+		int parent = hole/2;
+		
+		
+		
+		
+		
+		for(int temp = parent; array[temp].compareTo(array[hole])==(-1); temp++){
+			
+		}
+		
+		
+		
+		
+		
+		Comparable tmp = array[hole];
+		
+		if(array[parent].compareTo(tmp)==(-1)){
+			
+			percolateDown(parent);
+		}
+		
+		
+
+	}
+	
+	
+	
 
 	// Test program
 	public static void main(String[] args) {

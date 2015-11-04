@@ -100,9 +100,28 @@ public class Dijkstra {
 				
 
 				//check if b is completed
-				if(b.complete){
-					foundWay = true;
+				
+				
+					
+					
+				int counter = 0;
+				for(DNode node : graph){
+					
+					if(node.complete==true){
+						counter++;
+					}
+					
 				}
+				
+				if(counter==graph.length){
+					foundWay=true;
+				}
+					
+				
+//				
+//				if(b.complete){
+//					foundWay = true;
+//				}
 
 		}
 
