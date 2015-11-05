@@ -1,16 +1,14 @@
-package game;
+package impl;
 
-public class MemoryCard {
+import interfaces.MemoryCardInterface;
+
+public class MemoryCard implements MemoryCardInterface{
 	
 	private String value;
 	private state currentState;
 	
 	
-	public enum state{
-		VISIBLE,
-		SOLVED,
-		UNSOLVED;
-	}
+
 	
 	public MemoryCard(String value){
 		this.value = value;

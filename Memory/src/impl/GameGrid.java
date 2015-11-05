@@ -1,10 +1,13 @@
-package game;
+package impl;
+
+import interfaces.GameGridInterface;
+import interfaces.MemoryCardInterface.state;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class GameGrid {
+public class GameGrid implements GameGridInterface {
 	
-	private String[] cardValues = {"Affe","Hund","Tiger","Löwe","Yak","Dachs","Pferd","Kuh"};
+	private String[] cardValues = {"Affe","Hund","Tiger","LÃ¶we","Yak","Dachs","Pferd","Kuh"};
 	private MemoryCard[][]cards = new MemoryCard[4][4];
 	
 	
@@ -74,7 +77,7 @@ public class GameGrid {
 			
 			for(MemoryCard card : cardsCheck){
 				
-				if(card.getState() == MemoryCard.state.UNSOLVED){
+				if(card.getState() == state.UNSOLVED){
 					return false;
 				}
 				

@@ -1,16 +1,24 @@
-package game;
+package impl;
 
-import game.MemoryCard.state;
 
+
+import impl.player.AbstractPlayer;
+import impl.player.ComputerPlayer;
+import impl.player.HumanPlayer;
+import interfaces.MemoryCardInterface.state;
+import interfaces.MemoryGameInterface;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class MemoryGame {
+public class MemoryGame implements MemoryGameInterface {
 	
 	private GameGrid grid;
 	public short score;
 	
-
+	public ArrayList<AbstractPlayer> players = new ArrayList<AbstractPlayer>();
 	
+
 	public static void main(String[] args) {
 		
 		MemoryGame game = new MemoryGame();
@@ -25,6 +33,30 @@ public class MemoryGame {
 		this.score = 1;
 		this.grid = new GameGrid();
 		
+		Scanner start = new Scanner(System.in);
+		
+		System.out.println("How many Human players want to participate?");
+		int humanplayers = start.nextInt();
+		
+		for(int i=0; i<humanplayers;i++){
+			
+			System.out.println("Enter Player "+(i+1)+" Name:");
+			
+			players.add(new HumanPlayer(start.next(),this.grid));
+			
+			
+		}
+		
+		System.out.println("How many Computer players do you want to play against??");
+		int computerplayers = start.nextInt();
+		
+		for(int i=0; i<computerplayers;i++){
+			
+			players.add(new ComputerPlayer(this.grid,(i+1)));
+			System.out.println("COMPUTER "+(i+1)+" added!");
+			
+		}
+		
 		
 		//intialisiere Spielfeld
 		grid.setupCards();
@@ -38,7 +70,7 @@ public class MemoryGame {
 		//zeige Spielfeld
 		this.printGrid(true);
 		System.out.println("To start press enter key!");
-		Scanner start = new Scanner(System.in);
+		
 		start.nextLine();
 		hideGrid();
 		this.printGrid(false);
@@ -48,48 +80,55 @@ public class MemoryGame {
 			System.out.println("TURN "+(score));
 			System.out.println("-------------------------------------------------------------------------------------------");
 			
-			MemoryCard[] flipped = new MemoryCard[2];
-			for(int i=0; i<2; i++){
+			
+			
+			for(AbstractPlayer player : players){
 				
-				//this.printGrid(false);
+				System.out.println("It is PLAYER:"+player.getPlayerName()+"'s turn now!");
 				
-				System.out.println("Enter coordinate number");
-				Scanner input = new Scanner(System.in);
+				MemoryCard[] flipped = new MemoryCard[2];
 				
-				String coords = input.nextLine();
-				char xchar = coords.charAt(0);
-				char ychar = coords.charAt(1);
-
-				int x = Character.getNumericValue(xchar)-1;
-				int y = Character.getNumericValue(ychar)-1;
-
-				MemoryCard flippedCard = this.grid.getCard(x, y);
-				
-				if(flippedCard.getState()==state.SOLVED){
-					System.out.println("This card is already solved! Choose another Card!");
-					this.printGrid(false);
-					break;
-				}
-				
-				flipped[i]=flippedCard;
-				flippedCard.setState(state.VISIBLE);
-				this.printGrid(false);
-				
-				if(i==1){
+				for(int i=0; i<2; i++){
 					
-					if(flipped[0].equals(flipped[1])){
-						flipped[0].setState(state.SOLVED);
-						flipped[1].setState(state.SOLVED);
-					}else{
-						flipped[0].setState(state.UNSOLVED);
-						flipped[1].setState(state.UNSOLVED);
+					MemoryCard flippedCard = player.uncoverCard();
+					
+					if(flippedCard.getState()==state.SOLVED){
+						System.out.println("This card is already solved! Choose another Card!");
+						this.printGrid(false);
+						break;
 					}
+					
+					flipped[i]=flippedCard;
+					flippedCard.setState(state.VISIBLE);
+					this.printGrid(false);
+					
+					if(i==1){
+						
+						if(flipped[0].equals(flipped[1])){
+							flipped[0].setState(state.SOLVED);
+							flipped[1].setState(state.SOLVED);
+						}else{
+							flipped[0].setState(state.UNSOLVED);
+							flipped[1].setState(state.UNSOLVED);
+						}
 
+					}
+					
+					
+					
+					
 				}
+				
+				
+				
+			}
+			
+		
+				
+				
 
 			}
 			
-			score++;
 			
 			if(this.grid.isGameOver()){
 				System.out.println("Congratulations! You solved the Memory in "+(score
@@ -102,7 +141,7 @@ public class MemoryGame {
 			
 		}
 
-	}
+
 	
 	
 	private void printGrid(boolean showValues){
@@ -155,9 +194,6 @@ public class MemoryGame {
 		
 		
 	}
-	
-	
-	
-	
+
 
 }

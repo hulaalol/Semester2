@@ -1,4 +1,4 @@
-package game;
+package util;
 
 import java.io.*;
 import java.util.IllegalFormatException;
