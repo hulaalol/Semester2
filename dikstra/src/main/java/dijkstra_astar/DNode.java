@@ -9,6 +9,9 @@ public class DNode implements Comparable {
 	int distance;
 	int heuristic;
 	
+	double x;
+	double y;
+	
 	
 	int heapIndex;
 	
@@ -26,6 +29,35 @@ public class DNode implements Comparable {
 		this.weight2Origin = Integer.MAX_VALUE;
 	}
 	
+	public void setCoords(double x, double y){
+		this.x = x;
+		this.y= y;
+	}
+	
+	//x y im constructor setzen
+	
+	public static double calcHeuristic(DNode node, DNode target){
+		
+		double v1 = target.x - node.x;
+		double v2 = target.y - node.y;
+		
+		double luftlinie = Math.sqrt(v1*v1+v2*v2);
+		
+		luftlinie*=100;
+		
+		node.heuristic = (int) luftlinie;
+		
+		return luftlinie;
+	}
+	
+	public static int calcWeight(DNode nodeA, DNode nodeB){
+		
+		
+		double v1 = nodeA.x - nodeB.x;
+		double v2 = nodeA.x - nodeB.x;
+		
+		return (int) (100*Math.sqrt(v1*v1+v2*v2));
+	}
 	
 	
 	

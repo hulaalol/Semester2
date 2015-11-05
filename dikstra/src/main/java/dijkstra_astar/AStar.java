@@ -1,7 +1,7 @@
 package dijkstra_astar;
 
-public class Dijkstra {
-	
+public class AStar {
+
 	
 	public static void main(String[] args) {
 		
@@ -23,58 +23,132 @@ public class Dijkstra {
 		DNode b = new DNode("b");
 		
 		
-		//heurisitcs
-		a.heuristic=504;
-		x2.heuristic=384;
-		x3.heuristic=373;
-		x4.heuristic=301;
-		x5.heuristic=230;
-		x6.heuristic=79;
-		x7.heuristic=484;
-		x8.heuristic=314;
-		x9.heuristic=156;
-		x10.heuristic=80;
-		x11.heuristic=111;
-		b.heuristic=0;
+//		a.heuristic=504;
+//		x2.heuristic=384;
+//		x3.heuristic=373;
+//		x4.heuristic=301;
+//		x5.heuristic=230;
+//		x6.heuristic=79;
+//		x7.heuristic=484;
+//		x8.heuristic=314;
+//		x9.heuristic=156;
+//		x10.heuristic=80;
+//		x11.heuristic=111;
+//		b.heuristic=0;
 		
-		a.addEdge(x2, 162);
-		a.addEdge(x7, 82);
+		a.setCoords(4, 10);
+		x2.setCoords(8, 11);
+		x3.setCoords(7.5, 7);
+		x4.setCoords(11.5, 9.5);
+		x5.setCoords(14.5, 7);
+		x6.setCoords(17, 5);
+		x7.setCoords(2, 5);
+		x8.setCoords(6, 2.5);
+		x9.setCoords(11, 3);
+		x10.setCoords(13, 2);
+		x11.setCoords(23,8);
+		b.setCoords(23, 4);
+		
+		
+		
+		
+		
+		a.addEdge(x2, DNode.calcWeight(a, x2)); 
+		a.addEdge(x7, DNode.calcWeight(a, x7)); //kurven
 
-		x2.addEdge(x4, 92);
-		x2.addEdge(x3, 102);
+		x2.addEdge(x4, DNode.calcWeight(x2, x4));
+		x2.addEdge(x3, DNode.calcWeight(x2, x3));
 		
-		x7.addEdge(x3, 125);
-		x7.addEdge(x8, 177);
+		x7.addEdge(x3, DNode.calcWeight(x7, x3));
+		x7.addEdge(x8, DNode.calcWeight(x7, x8));
 		
-		x3.addEdge(x5, 152);
+		x3.addEdge(x5, DNode.calcWeight(x3, x5));
 		
-		x4.addEdge(x5, 89);
+		x4.addEdge(x5, DNode.calcWeight(x4, x5));
 		
-		x8.addEdge(x9, 188);
-		x8.addEdge(x5, 146);
+		x8.addEdge(x9, DNode.calcWeight(x8, x9));
+		x8.addEdge(x5, DNode.calcWeight(x8, x5));
 		
-		x5.addEdge(x11, 179);
-		x5.addEdge(x6, 151);
+		x5.addEdge(x11, DNode.calcWeight(x5, x11));
+		x5.addEdge(x6, DNode.calcWeight(x5, x6));
 		
-		x9.addEdge(x6, 120);
-		x9.addEdge(x10, 107);
+		x9.addEdge(x6, DNode.calcWeight(x9, x6));
+		x9.addEdge(x10, DNode.calcWeight(x9, x10));
 		
-		x10.addEdge(x6, 111);
-		x10.addEdge(b, 80);
+		x10.addEdge(x6, DNode.calcWeight(x10, x6));
+		x10.addEdge(b, DNode.calcWeight(x10, b));
 		
-		x6.addEdge(b, 79);
+		x6.addEdge(b, DNode.calcWeight(x6, b));
 		
-		x11.addEdge(b, 111);
+		x11.addEdge(b, DNode.calcWeight(x11, b));
+		
+		
+
+		
+		
+		//heuristics
+//		a.heuristic=504;
+//		x2.heuristic=384;
+//		x3.heuristic=373;
+//		x4.heuristic=301;
+//		x5.heuristic=230;
+//		x6.heuristic=79;
+//		x7.heuristic=484;
+//		x8.heuristic=314;
+//		x9.heuristic=156;
+//		x10.heuristic=80;
+//		x11.heuristic=111;
+//		b.heuristic=0;
+//		
+//		a.addEdge(x2, 162);
+//		a.addEdge(x7, 82);
+//
+//		x2.addEdge(x4, 92);
+//		x2.addEdge(x3, 102);
+//		
+//		x7.addEdge(x3, 125);
+//		x7.addEdge(x8, 177);
+//		
+//		x3.addEdge(x5, 152);
+//		
+//		x4.addEdge(x5, 89);
+//		
+//		x8.addEdge(x9, 188);
+//		x8.addEdge(x5, 146);
+//		
+//		x5.addEdge(x11, 179);
+//		x5.addEdge(x6, 151);
+//		
+//		x9.addEdge(x6, 120);
+//		x9.addEdge(x10, 107);
+//		
+//		x10.addEdge(x6, 111);
+//		x10.addEdge(b, 80);
+//		
+//		x6.addEdge(b, 79);
+//		
+//		x11.addEdge(b, 111);
 		
 		DNode[] graph = {a,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,b};
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		BinaryHeap heap = new BinaryHeap();
 		
 		//insert all nodes into binaryHeap
 		for(DNode node : graph){
 			
+			DNode.calcHeuristic(node, b);
+			
 			try {
-				heap.insert(node);	
+				heap.insert(node);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -91,13 +165,19 @@ public class Dijkstra {
 
 				DNode smallestNode = (DNode) heap.deleteMin();
 				
+				//subtract heuristic
+				if (!(smallestNode.name.equalsIgnoreCase("a"))){
+					smallestNode.distance=smallestNode.distance - smallestNode.heuristic;
+				}
+				
+				
 				//iterate over all edges to nodes that are not completed
 				for(int i=0; i<smallestNode.edges.size(); i++){
 					
 					if(smallestNode.edges.get(i).complete==false){
 						
 						
-					int predistance = smallestNode.distance + smallestNode.weights.get(i);
+					int predistance = smallestNode.distance + smallestNode.weights.get(i) + smallestNode.edges.get(i).heuristic;
 					//predistance + weight
 
 					if (predistance < smallestNode.edges.get(i).distance){
