@@ -67,9 +67,6 @@ public class BinaryHeap {
 		
 		//hier heap Index zuweisen
 		
-		 
-		Comparable whattheheck = array[hole];
-		
 		DNode node = (DNode)x;
 		
 		node.heapIndex = hole;
@@ -179,7 +176,7 @@ public class BinaryHeap {
 	 * 
 	 * @param hole
 	 *            the index of the element being checked if its rising
-	 *            runs in linear time
+	 *            runs in logarithmic time
 	 */
 	
 	@SuppressWarnings("unchecked")
