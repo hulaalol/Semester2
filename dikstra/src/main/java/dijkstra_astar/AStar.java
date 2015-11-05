@@ -144,7 +144,9 @@ public class AStar {
 		//insert all nodes into binaryHeap
 		for(DNode node : graph){
 			
-			DNode.calcHeuristic(node, b);
+			node.heuristic = DNode.calcWeight(node, b);
+			
+			//DNode.calcHeuristic(node, b);
 			
 			try {
 				heap.insert(node);

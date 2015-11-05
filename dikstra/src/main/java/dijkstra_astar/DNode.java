@@ -36,6 +36,9 @@ public class DNode implements Comparable {
 	
 	//x y im constructor setzen
 	
+	
+	
+	//nicht mehr benötigt
 	public static double calcHeuristic(DNode node, DNode target){
 		
 		double v1 = target.x - node.x;
@@ -50,6 +53,8 @@ public class DNode implements Comparable {
 		return luftlinie;
 	}
 	
+	
+	//heuristic und distance auf double ändern
 	public static int calcWeight(DNode nodeA, DNode nodeB){
 		
 		
