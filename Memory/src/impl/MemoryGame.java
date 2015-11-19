@@ -1,8 +1,10 @@
 package impl;
 
 
-
+import interfaces.IPlayer;
+import factories.PlayerFactory;
 import impl.player.AbstractPlayer;
+import impl.player.AbstractPlayer.PlayerType;
 import impl.player.ComputerPlayer;
 import impl.player.HumanPlayer;
 import interfaces.MemoryCardInterface.state;
@@ -42,7 +44,7 @@ public class MemoryGame implements MemoryGameInterface {
 			
 			System.out.println("Enter Player "+(i+1)+" Name:");
 			
-			players.add(new HumanPlayer(start.next(),this.grid));
+			players.add(PlayerFactory.getPlayer(PlayerType.HUMAN,start.next(),this.grid));
 			
 			
 		}
@@ -52,7 +54,7 @@ public class MemoryGame implements MemoryGameInterface {
 		
 		for(int i=0; i<computerplayers;i++){
 			
-			players.add(new ComputerPlayer(this.grid,(i+1)));
+			players.add(PlayerFactory.getPlayer(PlayerType.COMPUTER,"computer",this.grid));
 			System.out.println("COMPUTER "+(i+1)+" added!");
 			
 		}
@@ -73,7 +75,6 @@ public class MemoryGame implements MemoryGameInterface {
 		
 		start.nextLine();
 		hideGrid();
-		this.printGrid(false);
 
 		while(!(this.grid.isGameOver())){
 			
@@ -84,21 +85,40 @@ public class MemoryGame implements MemoryGameInterface {
 			
 			for(AbstractPlayer player : players){
 				
+				if(this.grid.isGameOver()){
+					break;
+				}
+				
+				score++;
+				
 				System.out.println("It is PLAYER:"+player.getPlayerName()+"'s turn now!");
+				this.printGrid(false);
 				
 				MemoryCard[] flipped = new MemoryCard[2];
 				
 				for(int i=0; i<2; i++){
 					
 					MemoryCard flippedCard = player.uncoverCard();
+					flipped[i]=flippedCard;
 					
-					if(flippedCard.getState()==state.SOLVED){
-						System.out.println("This card is already solved! Choose another Card!");
-						this.printGrid(false);
-						break;
+					
+					
+					if(flippedCard.getState()==state.SOLVED || (flipped[1]!=null && flipped[0]==flipped[1])){
+						
+						if(player.type==PlayerType.HUMAN){
+							System.out.println("This card is already solved! Choose another Card!");
+							this.printGrid(false);
+						}
+						
+						i--;
+						continue;
 					}
 					
-					flipped[i]=flippedCard;
+					
+					
+					if(player.type == PlayerType.COMPUTER){
+					System.out.println("Computer chooses card");
+					}
 					flippedCard.setState(state.VISIBLE);
 					this.printGrid(false);
 					
@@ -107,12 +127,44 @@ public class MemoryGame implements MemoryGameInterface {
 						if(flipped[0].equals(flipped[1])){
 							flipped[0].setState(state.SOLVED);
 							flipped[1].setState(state.SOLVED);
+							player.playerScore++;
 						}else{
 							flipped[0].setState(state.UNSOLVED);
 							flipped[1].setState(state.UNSOLVED);
 						}
-
+						
+						
+						
+						
+						
+						if(this.grid.isGameOver()){
+							
+							int winnerScore = 0;
+							winnerScore = players.get(0).playerScore;
+							AbstractPlayer realWinner = players.get(0);
+							
+							for(AbstractPlayer winner : players){
+							
+								if(winner.playerScore > winnerScore){
+									realWinner = winner;
+								}
+								
+							}
+							
+							System.out.println("The Winner is "+realWinner.getPlayerName()+" with "+realWinner.playerScore+" solved pairs!");
+							
+						}else if(!(this.grid.isGameOver())){
+							Scanner nextPlayer = new Scanner(System.in);
+							System.out.println("To continue with next Player press Enter");
+							nextPlayer.nextLine();
+						}
+						
+						
+						
 					}
+					
+					
+				
 					
 					
 					
@@ -130,16 +182,11 @@ public class MemoryGame implements MemoryGameInterface {
 			}
 			
 			
-			if(this.grid.isGameOver()){
-				System.out.println("Congratulations! You solved the Memory in "+(score
-						)+" tries!");
+		
 			}
 
 			
 
-			
-			
-		}
 
 
 	

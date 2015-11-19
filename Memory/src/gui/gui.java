@@ -23,15 +23,9 @@ public class gui extends Application{
 		primaryStage.setMaxHeight(800D);
 		primaryStage.setMaxWidth(800D);
 		
-		primaryStage.maxHeightProperty().bind(scene.heightProperty());
-		primaryStage.maxHeightProperty().bind(scene.widthProperty());
-		
 		primaryStage.setMinHeight(200D);
 		primaryStage.setMinWidth(200D);
 		
-		primaryStage.minWidthProperty().bind(scene.heightProperty());
-		primaryStage.minHeightProperty().bind(scene.widthProperty());
-
 
 
 		

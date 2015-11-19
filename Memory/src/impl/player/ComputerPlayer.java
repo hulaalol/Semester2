@@ -1,5 +1,6 @@
 package impl.player;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import impl.GameGrid;
@@ -10,6 +11,7 @@ public class ComputerPlayer extends AbstractPlayer {
 
 	public ComputerPlayer(GameGridInterface grid, int number){
 		super(("COMPUTER "+number),grid);
+		this.type = PlayerType.COMPUTER;
 	}
 
 	@Override
@@ -18,10 +20,11 @@ public class ComputerPlayer extends AbstractPlayer {
 		
 		GameGrid gamegrid = (GameGrid) this.grid;
 		
-		System.out.println("Computer chooses card");
 
-		int x = (int) Math.round((Math.random()*4));
-		int y = (int) Math.round((Math.random()*4));
+		Random rand = new Random();
+
+		int x = rand.nextInt(4);
+		int y = rand.nextInt(4);
 
 		return this.grid.getCard(x, y);
 		

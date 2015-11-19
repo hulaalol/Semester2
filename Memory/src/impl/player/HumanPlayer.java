@@ -10,6 +10,7 @@ public class HumanPlayer extends AbstractPlayer {
 
 	public HumanPlayer(String name, GameGridInterface grid) {
 		super(name, grid);
+		this.type = PlayerType.HUMAN;
 	}
 
 	@Override
