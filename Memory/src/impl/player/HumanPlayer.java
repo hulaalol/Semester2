@@ -22,8 +22,8 @@ public class HumanPlayer extends AbstractPlayer {
 		Scanner input = new Scanner(System.in);
 		
 		String coords = input.nextLine();
-		char xchar = coords.charAt(0);
-		char ychar = coords.charAt(1);
+		char xchar = coords.charAt(1);
+		char ychar = coords.charAt(0);
 
 		int x = Character.getNumericValue(xchar)-1;
 		int y = Character.getNumericValue(ychar)-1;

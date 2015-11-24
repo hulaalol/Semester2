@@ -3,6 +3,7 @@ package impl;
 
 import interfaces.IPlayer;
 import factories.PlayerFactory;
+import gui.gui;
 import impl.player.AbstractPlayer;
 import impl.player.AbstractPlayer.PlayerType;
 import impl.player.ComputerPlayer;
@@ -15,12 +16,23 @@ import java.util.Scanner;
 
 public class MemoryGame implements MemoryGameInterface {
 	
-	private GameGrid grid;
+	public GameGrid grid;
 	public short score;
 	
 	public ArrayList<AbstractPlayer> players = new ArrayList<AbstractPlayer>();
 	
 
+	public MemoryGame(){
+		this.grid = new GameGrid();
+		this.grid.setupCards();
+		
+//		for(MemoryCard[] card : grid.getCards()){
+//			card
+//		}
+		
+	}
+	
+	
 	public static void main(String[] args) {
 		
 		MemoryGame game = new MemoryGame();
@@ -75,6 +87,10 @@ public class MemoryGame implements MemoryGameInterface {
 		
 		start.nextLine();
 		hideGrid();
+		
+//		gui GameGui = new gui(this.grid);
+//		String[] args = null;
+//		GameGui.startGui(args);
 
 		while(!(this.grid.isGameOver())){
 			
