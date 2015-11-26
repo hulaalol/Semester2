@@ -14,6 +14,9 @@ import interfaces.MemoryGameInterface;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 public class MemoryGame implements MemoryGameInterface {
 	
 	public GameGrid grid;
@@ -35,8 +38,15 @@ public class MemoryGame implements MemoryGameInterface {
 	
 	public static void main(String[] args) {
 		
+		gui gameGraphic = new gui();
+		gameGraphic.launch(args);
+		
 		MemoryGame game = new MemoryGame();
-		game.playGame();
+		
+		gameGraphic.game = game;
+		gameGraphic.grid = game.grid;
+		
+		
 		
 	}
 	
@@ -44,53 +54,40 @@ public class MemoryGame implements MemoryGameInterface {
 	
 	public void playGame(){
 		
-		this.score = 1;
-		this.grid = new GameGrid();
+//		this.score = 1;
+//		this.grid = new GameGrid();
 		
-		Scanner start = new Scanner(System.in);
-		
-		System.out.println("How many Human players want to participate?");
-		int humanplayers = start.nextInt();
-		
-		for(int i=0; i<humanplayers;i++){
-			
-			System.out.println("Enter Player "+(i+1)+" Name:");
-			
-			players.add(PlayerFactory.getPlayer(PlayerType.HUMAN,start.next(),this.grid));
-			
-			
-		}
-		
-		System.out.println("How many Computer players do you want to play against??");
-		int computerplayers = start.nextInt();
-		
-		for(int i=0; i<computerplayers;i++){
-			
-			players.add(PlayerFactory.getPlayer(PlayerType.COMPUTER,"computer",this.grid));
-			System.out.println("COMPUTER "+(i+1)+" added!");
-			
-		}
+//		Scanner start = new Scanner(System.in);
+//		
+//		System.out.println("How many Human players want to participate?");
+//		int humanplayers = start.nextInt();
+//		
+//		for(int i=0; i<humanplayers;i++){
+//			
+//			System.out.println("Enter Player "+(i+1)+" Name:");
+//			
+//			players.add(PlayerFactory.getPlayer(PlayerType.HUMAN,start.next(),this.grid));
+//			
+//			
+//		}
+//		
+//		System.out.println("How many Computer players do you want to play against??");
+//		int computerplayers = start.nextInt();
+//		
+//		for(int i=0; i<computerplayers;i++){
+//			
+//			players.add(PlayerFactory.getPlayer(PlayerType.COMPUTER,"computer",this.grid));
+//			System.out.println("COMPUTER "+(i+1)+" added!");
+//			
+//		}
 		
 		
 		//intialisiere Spielfeld
 		grid.setupCards();
 		//setze alle Karten auf state.UNSOLVED
-		for(MemoryCard[] cardsCheck : grid.getCards()){
-			for(MemoryCard card : cardsCheck){
-				card.setState(state.UNSOLVED);
-			}
-		}
 
 		//zeige Spielfeld
-		this.printGrid(true);
-		System.out.println("To start press enter key!");
-		
-		start.nextLine();
-		hideGrid();
-		
-//		gui GameGui = new gui(this.grid);
-//		String[] args = null;
-//		GameGui.startGui(args);
+		this.grid.unlockCards();
 
 		while(!(this.grid.isGameOver())){
 			
@@ -255,6 +252,13 @@ public class MemoryGame implements MemoryGameInterface {
 			System.out.println("\n");
 		}
 		
+		
+	}
+
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		// TODO Auto-generated method stub
 		
 	}
 

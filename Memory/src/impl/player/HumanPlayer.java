@@ -28,7 +28,8 @@ public class HumanPlayer extends AbstractPlayer {
 		int x = Character.getNumericValue(xchar)-1;
 		int y = Character.getNumericValue(ychar)-1;
 		
-		return this.grid.getCard(x, y);
+		//all wrong lel
+		return this.grid.getCard(x);
 
 	}
 }

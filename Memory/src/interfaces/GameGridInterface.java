@@ -4,9 +4,9 @@ import impl.MemoryCard;
 
 public interface GameGridInterface {
 	
-	MemoryCard getCard(int a,int b);
+	MemoryCard getCard(int a);
 	
-	MemoryCard[][] getCards();
+	MemoryCard[] getCards();
 	
 	boolean isGameOver();
 	

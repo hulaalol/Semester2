@@ -16,17 +16,12 @@ public class ComputerPlayer extends AbstractPlayer {
 
 	@Override
 	public MemoryCard uncoverCard() {
-		
-		
-		GameGrid gamegrid = (GameGrid) this.grid;
-		
-
+	
 		Random rand = new Random();
 
-		int x = rand.nextInt(4);
-		int y = rand.nextInt(4);
+		int x = rand.nextInt(16);
 
-		return this.grid.getCard(x, y);
+		return this.grid.getCard(x);
 		
 	}
 	

@@ -6,12 +6,14 @@ public class MemoryCard implements MemoryCardInterface{
 	
 	private String value;
 	private state currentState;
+	public boolean locked;
 	
 	
 
 	
 	public MemoryCard(String value){
 		this.value = value;
+		locked = false;
 		
 	}
 	
