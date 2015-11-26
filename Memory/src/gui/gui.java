@@ -73,11 +73,11 @@ public class gui extends Application{
 				@Override
 				public void handle(ActionEvent event) {
 					
-					if(list[index].getState()==MemoryCardInterface.state.UNSOLVED){
+//					if(list[index].getState()==MemoryCardInterface.state.UNSOLVED){
 						tmp.setText(list[index].getValue());
-					}else{
-						tmp.setText(""+index);
-					}
+//					}else{
+//						tmp.setText(""+index);
+//					}
 					
 					
 					

@@ -14,7 +14,6 @@ public class GameGrid implements GameGridInterface {
 	private void placeCards(String value){
 		
 		
-		//for(int i=0; i<8; i++){
 			
 			int x1=0;
 			int y1=0;
@@ -59,12 +58,9 @@ public class GameGrid implements GameGridInterface {
 	
 	
 	public void setupCards(){
-		
 		for(String card : cardValues){
 			placeCards(card);
-
 		}
-
 	}
 	
 	public MemoryCard getCard(int x, int y){
