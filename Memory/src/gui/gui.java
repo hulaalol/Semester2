@@ -1,5 +1,7 @@
 package gui;
 
+import java.io.File;
+
 import impl.GameGrid;
 import impl.MemoryCard;
 import impl.MemoryGame;
@@ -31,16 +33,7 @@ public class gui extends Application{
 	static Image[] cardPictures = new Image[9];
 	
 	static{
-		cardPictures[0] = new Image("file:/stud/mh252/git/Semester2.1/Memory/src/gui/Dachsnormal.png");
-		cardPictures[1] = new Image("file:/stud/mh252/git/Semester2.1/Memory/src/gui/loewe.png");
-		cardPictures[2] = new Image("file:/stud/mh252/git/Semester2.1/Memory/src/gui/monkey.png");
-		cardPictures[3] = new Image("file:/stud/mh252/git/Semester2.1/Memory/src/gui/doge.png");
 		
-		cardPictures[4] = new Image("file:/stud/mh252/git/Semester2.1/Memory/src/gui/horse.png");
-		cardPictures[5] = new Image("file:/stud/mh252/git/Semester2.1/Memory/src/gui/yak.png");
-		cardPictures[6] = new Image("file:/stud/mh252/git/Semester2.1/Memory/src/gui/cow.png");
-		cardPictures[7] = new Image("file:/stud/mh252/git/Semester2.1/Memory/src/gui/tiger.png");
-		cardPictures[8] = new Image("file:/stud/mh252/git/Semester2.1/Memory/src/gui/back.png");
 
 	}
 	
@@ -50,6 +43,17 @@ public class gui extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
+		cardPictures[0] = new Image("file:./resources/Dachsnormal.png");
+		cardPictures[1] = new Image("file:./resources/loewe.png");
+		cardPictures[2] = new Image("file:./resources/monkey.png");
+		cardPictures[3] = new Image("file:./resources/doge.png");
+		
+		cardPictures[4] = new Image("file:./resources/horse.png");
+		cardPictures[5] = new Image("file:./resources/yak.png");
+		cardPictures[6] = new Image("file:./resources/cow.png");
+		cardPictures[7] = new Image("file:./resources/tiger.png");
+		cardPictures[8] = new Image("file:./resources/back.png");
+
 		//graphic ui
 		StackPane root = new StackPane();
 
