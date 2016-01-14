@@ -30,30 +30,22 @@ public class gui extends Application{
 	static Button[] field = new Button[16];
 	int flippedCounter=0;
 	
-	static Image[] cardPictures = new Image[9];
-	
-	static{
-		
+	public static Image[] cardPictures = new Image[9];
 
-	}
-	
-
-	
-	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
-		cardPictures[0] = new Image("file:./resources/Dachsnormal.png");
-		cardPictures[1] = new Image("file:./resources/loewe.png");
-		cardPictures[2] = new Image("file:./resources/monkey.png");
-		cardPictures[3] = new Image("file:./resources/doge.png");
-		
-		cardPictures[4] = new Image("file:./resources/horse.png");
-		cardPictures[5] = new Image("file:./resources/yak.png");
-		cardPictures[6] = new Image("file:./resources/cow.png");
-		cardPictures[7] = new Image("file:./resources/tiger.png");
-		cardPictures[8] = new Image("file:./resources/back.png");
 
+		cardPictures[0] = new Image(getClass().getClassLoader().getResourceAsStream("Dachsnormal.png"));
+		cardPictures[1] = new Image(getClass().getClassLoader().getResourceAsStream("loewe.png"));
+		cardPictures[2] = new Image(getClass().getClassLoader().getResourceAsStream("monkey.png"));
+		cardPictures[3] = new Image(getClass().getClassLoader().getResourceAsStream("doge.png"));
+		cardPictures[4] = new Image(getClass().getClassLoader().getResourceAsStream("horse.png"));
+		cardPictures[5] = new Image(getClass().getClassLoader().getResourceAsStream("yak.png"));
+		cardPictures[6] = new Image(getClass().getClassLoader().getResourceAsStream("cow.png"));
+		cardPictures[7] = new Image(getClass().getClassLoader().getResourceAsStream("tiger.png"));
+		cardPictures[8] = new Image(getClass().getClassLoader().getResourceAsStream("back.png"));
+		
+		
 		//graphic ui
 		StackPane root = new StackPane();
 
